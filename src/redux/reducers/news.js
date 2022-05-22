@@ -49,17 +49,46 @@ const initialState = {
              филиалом московской коллегии адвокатов "Защита" Анатолий Миронов.  Источник: РИА Новости`,
       createDate: "2022-05-22",
       approved: false,
-    }
+    },
   ],
 };
 
 export const newsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'value':
-      
-      break;
-  
+    case "ADD_NEWS":
+      return {
+        ...state,
+        news: [
+          {
+            id: Date.now(),
+            name: action.payload.newsName,
+            text: action.payload.newsText,
+            createDate: new Date().toISOString().split("T")[0],
+            approved: false,
+          },
+          ...state.news,
+        ],
+      };
+
+    case "DELETE_NEWS":
+      return {
+        ...state,
+        news: state.news.filter((newsItem) => newsItem.id !== action.payload),
+      };
+
+    case "APPROVE_NEWS":
+      return {
+        ...state,
+        news: state.news.map((newsItem) => {
+          if (newsItem.id === action.payload) {
+            newsItem.approved = true;
+            return newsItem;
+          }
+          return newsItem;
+        }),
+      };
+
     default:
       return state;
   }
-}
+};
