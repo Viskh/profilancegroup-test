@@ -1,31 +1,36 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import AddNews from "./AddNews";
 import logo from "../assets/profilance.svg";
 import Login from "./Login";
 
 const Header = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const {authorized} = useSelector((state) => state.usersReducer);
+  const { users, authorized } = useSelector((state) => state.usersReducer);
 
-  const [openModal, setOpenModal] = useState(false);
-  
+  const user = users.find((item) => item.login === authorized);
+
+  const [openModalLogin, setOpenModalLogin] = useState(false);
+  const [openModalAddNews, setOpenModalAddNews] = useState(false);
 
   const handleLogout = () => {
-    dispatch({type: "LOGOUT"})
+    dispatch({ type: "LOGOUT" });
     localStorage.clear();
   };
 
   return (
     <>
       <header className="header">
+        <div className="header__logo">
+          <Link to={"/"}>
+            <img src={logo} alt="logo" />
+          </Link>
+        </div>
+        
         <ul className="header__list-items">
-          <li className="header__item">
-            <Link to={"/"}>
-              <img src={logo} alt="logo" className="header__logo" />
-            </Link>
-          </li>
+          <li className="header__item"></li>
           <li className="header__item">
             <NavLink to={"/news"}>Новости</NavLink>
           </li>
@@ -35,13 +40,31 @@ const Header = () => {
               Выход
             </li>
           ) : (
-            <li onClick={() => setOpenModal(true)} className="header__item">
+            <li
+              onClick={() => setOpenModalLogin(true)}
+              className="header__item"
+            >
               Вход
             </li>
           )}
+
+          {authorized && user.role === "user" && (
+            <li
+              onClick={() => setOpenModalAddNews(true)}
+              className="header__item"
+            >
+              Добавить новость
+            </li>
+
+          )}
         </ul>
       </header>
-      {openModal && <Login setOpenModal={setOpenModal} />}
+
+      {openModalLogin && <Login setOpenModalLogin={setOpenModalLogin} />}
+      {openModalAddNews && (
+        <AddNews setOpenModalAddNews={setOpenModalAddNews} />
+      )}
+
     </>
   );
 };

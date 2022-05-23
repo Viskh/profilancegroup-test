@@ -22,15 +22,15 @@ const NewsItem = ({ newsItem }) => {
       <p className="news__text">{newsItem.text}</p>
       <h5 className="news__date">{newsItem.createDate}</h5>
       {authorized && user.role === "admin" && (
-        <>
+        <div className="news__btns">
           <button onClick={() => handleDeleteNews(newsItem.id)}>Удалить</button>
 
-          {!newsItem.approved && (
+          {!newsItem.approved ? (
             <button onClick={() => hanldeApproveNews(newsItem.id)}>
               Одобрить
             </button>
-          )}
-        </>
+          ) : <p>Одобрено</p>}
+        </div>
       )}
     </div>
   );

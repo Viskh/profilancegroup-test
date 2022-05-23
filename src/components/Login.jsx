@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const Login = ({ setOpenModal }) => {
+const Login = ({ setOpenModalLogin }) => {
   const dispatch = useDispatch();
 
   const { users, error, authorized } = useSelector(
@@ -31,12 +31,12 @@ const Login = ({ setOpenModal }) => {
 
   useEffect(() => {
     if (authorized) {
-      setOpenModal(false);
+      setOpenModalLogin(false);
     }
-  }, [authorized, setOpenModal]);
+  }, [authorized, setOpenModalLogin]);
 
   return (
-    <div className="modal-window" onClick={() => setOpenModal(false)}>
+    <div className="modal-window" onClick={() => setOpenModalLogin(false)}>
       <div
         className="modal-window__container"
         onClick={(e) => e.stopPropagation()}

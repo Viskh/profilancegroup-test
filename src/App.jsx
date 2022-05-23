@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
-import News from "./components/News";
+import News from "./components/News/News";
+
 
 const App = () => {
   return (
