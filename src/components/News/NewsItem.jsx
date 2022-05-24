@@ -21,6 +21,7 @@ const NewsItem = ({ newsItem }) => {
       <h2 className="news__name">{newsItem.name}</h2>
       <p className="news__text">{newsItem.text}</p>
       <h5 className="news__date">{newsItem.createDate}</h5>
+
       {authorized && user.role === "admin" && (
         <div className="news__btns">
           <button onClick={() => handleDeleteNews(newsItem.id)}>Удалить</button>
@@ -29,8 +30,15 @@ const NewsItem = ({ newsItem }) => {
             <button onClick={() => hanldeApproveNews(newsItem.id)}>
               Одобрить
             </button>
-          ) : <p>Одобрено</p>}
+          ) : (
+            <p>Одобрено</p>
+          )}
+          
         </div>
+      )}
+
+      {authorized && user.role === "user" && (
+        <p>{!newsItem.approved ? "Не одобрено" : "Одобрено"}</p>
       )}
     </div>
   );

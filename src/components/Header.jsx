@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import AddNews from "./AddNews";
 import logo from "../assets/profilance.svg";
 import Login from "./Login";
@@ -24,9 +24,9 @@ const Header = () => {
     <>
       <header className="header">
         <div className="header__logo">
-          <Link to={"/"}>
+          <NavLink to={"/"}>
             <img src={logo} alt="logo" />
-          </Link>
+          </NavLink>
         </div>
         
         <ul className="header__list-items">
@@ -51,7 +51,7 @@ const Header = () => {
           {authorized && user.role === "user" && (
             <li
               onClick={() => setOpenModalAddNews(true)}
-              className="header__item"
+              className="header__item add-news"
             >
               Добавить новость
             </li>
