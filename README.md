@@ -1,10 +1,10 @@
-<p>Админ</p>
-* login:  admin
-* password: senior
+<h3>Админ</h3>
+<p> login:  admin </p>
+<p> password: senior </p>
 
-<p>User:</p>
-* login: mark
-* password: junior
+<h3>User:</h3>
+<p> login: mark </p>
+<p> password: junior </p>
 
 <h2>npm i</h2>
 
